@@ -15,7 +15,12 @@ const groq = new Groq({
 connectDB();
 
 /* MIDDLEWARE */
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin:"* ", // Add your Vercel URL here
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 
 /* ROUTES */
