@@ -1,0 +1,39 @@
+# --- Dependencies ---
+# Never upload these; they are re-installed via 'npm install'
+node_modules/
+jspm_packages/
+package-lock.json
+yarn.lock
+
+# --- Secrets & Environment Variables ---
+# CRITICAL: This prevents your MongoDB Atlas password from leaking
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --- Debugging & Logs ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
+
+# --- Build Folders ---
+# These are generated during deployment
+dist/
+build/
+.next/
+out/
+
+# --- IDE & System Files ---
+# Files created by VS Code, Windows, or Mac that others don't need
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Testing ---
+coverage/
