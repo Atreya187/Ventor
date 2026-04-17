@@ -17,7 +17,7 @@ connectDB();
 /* MIDDLEWARE */
 // app.use(cors());
 app.use(cors({
-  origin:"*", // Add your Vercel URL here
+  origin:"https://ventor-delta.vercel.app/", // Add your Vercel URL here
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
