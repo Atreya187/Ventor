@@ -314,7 +314,7 @@ result.cautions.map(c=>`<li>${c}</li>`).join("");
 const maxScore = Math.max(...Object.values(result.scores));
 
 const successPercent =
-Math.round((maxScore / totalScore) * 100);
+((maxScore / totalScore) * 100).toFixed(1);
 
 document.getElementById("successScore").innerText =
 successPercent + "%";
