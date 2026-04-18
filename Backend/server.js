@@ -17,7 +17,7 @@ connectDB();
 /* MIDDLEWARE */
 // Inside Backend/server.js
 app.use(cors({
-  origin: "https://ventor-seven.vercel.app/", // This allows ANY frontend to talk to it for now
+  origin: "https://ventor-seven.vercel.app", // This allows ANY frontend to talk to it for now
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: false // Set to false since origin is "*"
 }));
