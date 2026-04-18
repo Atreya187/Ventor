@@ -1,0 +1,821 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* --- VENTOR Logo Styles --- */
+.ventor-logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0px; /* Keeps the V and ENTOR connected */
+}
+
+.ventor-v {
+    width: 48px;
+    height: 35px;
+    margin-right: -2px; /* Pulls text slightly closer to the V */
+    margin-top: -1.5px; /* Optically aligns the V with the text height */
+    filter: brightness(1.4);
+}
+
+body.dark-mode .ventor-v{
+filter: brightness(2) drop-shadow(0 0 8px rgba(0, 255, 170, 0.2));
+}
+
+.ventor-text {
+    font-family:Michroma;  
+  font-weight: 700;          /* Bold */
+  font-size: 25px;           /* Adjust as needed */
+  letter-spacing: 4px;       /* IMPORTANT for logo feel */
+  text-transform: uppercase;
+  color: #0b1f3a;     
+}
+
+/* Separate class for the logo image */
+.custom-nav-logo {
+    height: 48px;
+    width: auto;
+    display: block;
+    transition: all 0.3s ease;
+    
+    /* LIGHT MODE: Standard white background removal */
+    mix-blend-mode: multiply; 
+    margin-right: -5px;
+    background-image: transparent;
+}
+
+/* Dark Mode handling for the logo */
+body.dark-mode .custom-nav-logo {
+    /* 1. Remove blend mode which fails on black */
+    mix-blend-mode: normal; 
+    
+    /* 2. The Filter Stack:
+       - Invert(1) turns the white background black
+       - Hue-rotate(180deg) restores the original blue/green colors
+       - Brightness/Contrast makes it pop against the dark theme */
+    filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2);
+    
+    /* 3. Optional: Add a subtle glow so the logo doesn't feel 'flat' */
+    filter: invert(1) hue-rotate(180deg) drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+}
+
+/* Optional: Slight lift on hover to match your dashboard style */
+/* .custom-nav-logo:hover {
+    transform: scale(1.05);
+} */
+
+
+/* Ensure the text remains visible in Dark Mode */
+body.dark-mode .ventor-text {
+    color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    /* background: linear-gradient(135deg,#2c3e50, #4ca1af); */
+    padding: 40px 40px;
+    height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 1000; /* Stays above the carousel */
+}
+
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.logo-circle { width: 40px; height: 40px; background: #2563eb; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+.brand-name { font-size: 1.4rem; font-weight: 800; color: #1f2937; }
+
+.nav-links { display: flex; list-style: none; gap: 5px; padding-top: 0px;align-items: center;}
+.nav-links li a { text-decoration: none; color: #4b5563; font-weight: 500; padding: 10px 22px; border-radius: 50px; transition: 0.3s; }
+.nav-links li a:hover { background-color: #f2f2f4; color: #1872c1; }
+
+.nav-auth { display: flex; align-items: center; gap: 20px; }
+.signup-btn { background-color: #1f2937; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+ 
+}
+
+/* Container for the dropdown
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+} */
+
+/* The "v" icon styling */
+.chevron {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate icon on hover */
+.dropdown:hover .chevron {
+  transform: rotate(180deg);
+}
+
+/* The Dropdown Box */
+.dropdown-menu {
+ display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff; 
+    min-width: 220px;
+    padding: 10px; /* Space inside the box so the pills don't touch the edges */
+    margin: 0;
+    list-style: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+/* Show Menu on Hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  color:green;
+}
+
+/* Individual Dropdown Links */
+.dropdown-menu li a {
+ color: #4b5563; /* Dark grey text to match your other nav links */
+    padding: 10px 22px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50px; /* This creates the 'pill' shape */
+    transition: 0.3s;
+}
+
+.dropdown-trigger{
+  display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+/* The "Highlight" effect when hovering over an option */
+.dropdown-menu li a:hover {
+  background-color: #f2f2f4; /* Light grey background on hover */
+   color: #1872c1;           /* Green text on hover */
+    padding-left: 22px; /* Slight nudge effect */
+}
+
+/* Ensure the navbar doesn't cut off the menu */
+.nav-links {
+  overflow: visible !important;
+}
+
+
+
+.highllight{
+   background-color: #f2f2f4; color: #1872c1;; padding: 10px 1px; border-radius: 50px; 
+}
+.highllight li{
+  color: #1872c1;
+}
+
+/* --- Assessment & Reports Section --- */
+
+
+.section-spacer {
+    background-color: #ffffff; /* Changed from #f4f4f4 to white */
+    padding: 10px 0; /* Reduced padding */
+}
+
+.services-content-wrapper {
+    margin-top: 120px;
+    position: relative;
+    padding: 0 20px;
+}
+
+/* Assessment Text */
+.assessment-text-large {
+    font-size: 2.1rem; /* Reduced from 1.6rem */
+    color: #4b5563;
+    line-height: 1.5; /* Adjusted for smaller font */
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    text-align: center;
+    padding: 10px 20px 0 30px;
+}
+.assement-section{
+  padding: 0px 0; /* Added proper vertical padding */
+    background-color: #ffffff;
+}
+
+/* CTA Button Wrapper */
+.cta-center-wrapper {
+    text-align: center;
+}
+
+/* CTA Button */
+.cta-button-blue-collar-giant {
+    background: linear-gradient(135deg, #2563eb, #1e40af, #1e3a8a); 
+    color: #ffffff !important;
+    font-size: 1.1rem; /* Reduced from 1.6rem */
+    padding: 15px 40px; /* Reduced from 25px 80px */
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(30, 64, 175, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.cta-button-blue-collar-giant:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(30, 64, 175, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Report List Styling */
+.reports-section {
+    padding: 70px 0; /* Reduced padding by 30px (from 100px) */
+    background-color: #f4f4f4;
+    width: calc(100% - 30px); /* Reduced total width */
+    margin: 0 auto; /* Center after width reduction */
+}
+
+.reports-list-modern {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 900px;
+}
+
+.report-item {
+    background: var(--card-bg);
+    padding: 25px 35px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.report-item:hover {
+    transform: translateY(-3px);
+}
+
+.report-info {
+    text-align: left;
+}
+
+.report-title {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--text-main);
+    display: block;
+}
+
+.report-date {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.view-report-btn {
+    white-space: nowrap;
+    margin-left: 20px;
+}
+
+/* Empty State Styling */
+.empty-state-card-premium {
+    background: #ffffff;
+    padding: 70px 30px; /* Reduced from 100px 40px */
+    border-radius: 20px;
+    border: 3px dashed #cbd5e0;
+    text-align: center;
+    max-width: 870px; /* Reduced width by 30px */
+    margin: 0 auto;
+}
+
+
+.empty-text-large {
+    font-size: 1.8rem; /* Increased size */
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-top: 30px;
+}
+
+/* Icon Circle */
+.giant-icon-circle {
+    width: 150px;
+    height: 150px;
+    background-color: #000000;
+    border-radius: 50%;
+    margin: 0 auto 25px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 4rem;
+}
+/* how it works */
+
+
+:root {
+  --card-bg: #ffffff;
+  --text-main: #1a1a1a;
+  --text-muted: #555555;
+  --transition-speed: 0.3s;
+}
+
+.how-it-works {
+  padding: 80px 20px;
+  background-color: #ffffff;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.steps-grid {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.step-card {
+  flex: 1;
+  background: var(--card-bg);
+  padding: 50px 30px;
+  border-radius: 12px;
+  text-align: center;
+  /* Soft widespread shadow similar to image */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Hover Effect */
+.step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Icon Container (Black Circle) */
+.icon-circle {
+    width: 85px;
+    height: 85px;
+    background-color: #000000;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-circle i {
+    color: #ffffff; /* Makes the icon white */
+    font-size: 2rem; /* Adjusts icon size */
+}
+.step-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 20px;
+}
+
+.step-description {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* CSS-only Icons based on the image style */
+/* .icon-user-plus {
+  width: 24px; height: 24px; border: 3px solid #fff; border-radius: 50%;
+  position: relative;
+} */
+/* .icon-user-plus::after {
+  content: '+'; color: #fff; position: absolute; right: -12px; top: -5px; font-weight: bold; font-size: 18px;
+} */
+
+/* .icon-search {
+  width: 22px; height: 22px; border: 3px solid #fff; border-radius: 50%;
+  position: relative; transform: rotate(-45deg);
+} */
+/* .icon-search::after {
+  content: ''; width: 3px; height: 12px; background: #fff; position: absolute; bottom: -12px; left: 8px;
+} */
+
+/* .icon-report-check {
+  width: 20px; height: 20px; border: 3px solid #fff; border-radius: 50%;
+  position: relative;
+} */
+/* .icon-report-check::after {
+  content: '✓'; color: #fff; position: absolute; right: -10px; top: -5px; font-size: 16px;
+} */
+
+/* Responsive */
+@media (max-width: 900px) {
+  .steps-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+
+
+
+/* Faq section */
+/* Faq section */
+.faq-section {
+    padding: 80px 20px;
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+.faq-divider {
+    border: none;
+    height: 6px;
+    background-color: #000;
+    width: 100px;
+    margin: 0 auto 20px auto;
+}
+
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-top: 0;
+    margin-bottom: 60px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.faq-container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.faq-item {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+
+.faq-question i {
+    font-size: 0.9rem;
+    color: #2b6cb0; 
+    transition: transform 0.3s ease;
+}
+
+
+ .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out; /* This makes the opening visible */
+    background-color: #fff;
+}
+
+
+.faq-answer p {
+    padding: 0 25px 25px 25px;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #718096;
+}
+
+/* Active State */
+.faq-item.active .faq-question {
+    color: #2b6cb0;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* footer */
+:root {
+  --bg-dark: #2d3237;
+  --icon-bg: #33383b;
+  --link-blue: #5383d3;
+}
+
+.footer-distributed {
+  background: var(--bg-dark);
+  width: 100%;
+  padding: 80px 0;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  /* This pushes the two sides to the extreme ends of the container */
+  justify-content: space-between; 
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+/* Left Column Styling */
+.footer-left {
+  flex: 0 1 auto;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.contact-item i {
+  background-color: var(--icon-bg);
+  color: #ffffff;
+  font-size: 24px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 55px;
+  margin-right: 25px;
+}
+
+.contact-item p {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 0;
+}
+
+.contact-item p span {
+  display: block;
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+
+.contact-item p a {
+  color: var(--link-blue);
+  text-decoration: none;
+}
+
+/* Right Column Styling */
+.footer-right {
+  flex: 0 1 480px; /* Limits the width of the About text */
+}
+
+.footer-company-about {
+  line-height: 1.8;
+  color: #92999f;
+  font-size: 17px;
+}
+
+.footer-company-about span {
+  display: block;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.footer-icons {
+  margin-top: 35px;
+}
+
+.footer-icons a {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: var(--icon-bg);
+  border-radius: 4px;
+  font-size: 22px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 48px;
+  margin-right: 12px;
+  transition: 0.3s;
+}
+
+.footer-icons a:hover {
+  background-color: var(--link-blue);
+  transform: translateY(-5px);
+}
+
+/* Responsive Logic */
+@media (max-width: 992px) {
+  .footer-container {
+    flex-direction: column;
+    padding: 0 30px;
+    gap: 50px;
+  }
+  .footer-right {
+    max-width: 100%;
+  }
+}
+
+
+/* dark mode */
+/* --- SERVICES PAGE DARK MODE (FORCE OVERRIDE) --- */
+
+/* 1. Global Body Override */
+body.dark-mode {
+    background-color: #0f172a !important;
+    color: #1c85ef !important;
+}
+
+/* 2. Navbar & Navigation Override */
+body.dark-mode .navbar {
+    background-color: #1e293b !important;
+    border-bottom: 1px solid #334155 !important;
+}
+
+/* body.dark-mode .nav-links li a,  */
+body.dark-mode .brand-name,
+body.dark-mode .dropdown-trigger {
+    color: #ebf0f5 !important;
+}
+
+/* 3. Assessment & Headings */
+body.dark-mode .assessment-text-large {
+    color: #cbd5e0 !important;
+}
+
+body.dark-mode .section-title {
+    color: #ffffff !important;
+}
+
+/* 4. Step Cards & Icons */
+body.dark-mode .step-card {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .step-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .step-description {
+    color: #94a3b8 !important;
+}
+
+/* 5. FAQ Section */
+body.dark-mode .faq-section,
+body.dark-mode .faq-answer {
+    background-color: #0f172a !important;
+}
+
+body.dark-mode .faq-item {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+}
+
+body.dark-mode .faq-question {
+    color: #e2e8f0 !important;
+}
+
+/* 6. Footer Override */
+/* body.dark-mode .footer-distributed {
+    background-color: #020617 !important;
+} */
+
+
+/* --- SERVICES PAGE DARK MODE FIXES --- */
+
+/* 1. The Active Navbar Link (Services) Fix */
+body.dark-mode .highllight {
+    background-color: #334155 !important; /* Muted Slate Blue */
+    color: #61c11d !important;
+}
+
+body.dark-mode .highllight li a {
+    color: #61c11d !important;
+}
+
+/* 2. Global Body & Backgrounds */
+body.dark-mode {
+    background-color: #0f172a !important; /* Deep Navy */
+    color: #f1f5f9 !important;
+}
+
+/* 3. Sections that stay white currently */
+body.dark-mode .how-it-works,
+body.dark-mode .faq-section,
+body.dark-mode .assement-section,
+body.dark-mode .section-spacer {
+    background-color: #0f172a !important;
+}
+
+/* 4. Text Contrast Improvements */
+body.dark-mode .assessment-text-large,
+body.dark-mode .step-description,
+body.dark-mode .faq-answer p {
+    color: #94a3b8 !important; /* Soft grey for readability */
+}
+
+body.dark-mode .section-title,
+body.dark-mode .step-title,
+body.dark-mode .faq-question {
+    color: #ffffff !important;
+}
+
+/* 5. Navbar and Dropdown */
+body.dark-mode .navbar,
+body.dark-mode .dropdown-menu {
+    background-color: #1e293b !important;
+    border-bottom: 1px solid #334155 !important;
+}
+
+body.dark-mode .nav-links li a:not(.highllight li a) {
+    color: #cbd5e0 !important;
+}
+
+body.dark-mode .nav-links li a:hover {
+    background-color: #334155 !important;
+    color: #61c11d !important;
+}

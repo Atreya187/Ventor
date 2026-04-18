@@ -1,0 +1,1032 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap'); */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* dark mode */
+
+
+/* 1. Define Variable Colors */
+:root {
+    --bg-color: #fdfdfd;
+    --text-color: #1a1a2e;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --accent-soft: #eef2ff;
+}
+
+/* 2. Define Dark Mode Overrides */
+body.dark-mode {
+    --bg-color: #0f172a; /* Deep Navy */
+    --text-color: #f1f5f9; /* Light Grey */
+    --card-bg: #1e293b; /* Slate Blue */
+    --border-color: #334155;
+    --accent-soft: #1e1b4b; /* Dark Indigo */
+}
+
+/* 3. Apply variables to your elements */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.badge, .metrics-grid {
+    background: var(--accent-soft);
+}
+
+
+
+
+
+body {
+    background-color: var(--card-bg);
+    overflow-x: hidden;
+}
+
+/* --- VENTOR Logo Styles --- */
+.ventor-logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0px; /* Keeps the V and ENTOR connected */
+}
+
+.ventor-v {
+    width: 48px;
+    height: 35px;
+    margin-right: -2px; /* Pulls text slightly closer to the V */
+    margin-top: -1.5px; /* Optically aligns the V with the text height */
+    filter: brightness(1.4);
+}
+
+body.dark-mode .ventor-v{
+filter: brightness(2) drop-shadow(0 0 8px rgba(0, 255, 170, 0.2));
+}
+
+.ventor-text {
+    font-family:Michroma;  
+  font-weight: 700;          /* Bold */
+  font-size: 25px;           /* Adjust as needed */
+  letter-spacing: 4px;       /* IMPORTANT for logo feel */
+  text-transform: uppercase;
+  color: #0b1f3a;     
+}
+
+/* Separate class for the logo image */
+.custom-nav-logo {
+    height: 48px;
+    width: auto;
+    display: block;
+    transition: all 0.3s ease;
+    
+    /* LIGHT MODE: Standard white background removal */
+    mix-blend-mode: multiply; 
+    margin-right: -5px;
+    background-image: transparent;
+}
+
+/* Dark Mode handling for the logo */
+body.dark-mode .custom-nav-logo {
+    /* 1. Remove blend mode which fails on black */
+    mix-blend-mode: normal; 
+    
+    /* 2. The Filter Stack:
+       - Invert(1) turns the white background black
+       - Hue-rotate(180deg) restores the original blue/green colors
+       - Brightness/Contrast makes it pop against the dark theme */
+    filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2);
+    
+    /* 3. Optional: Add a subtle glow so the logo doesn't feel 'flat' */
+    filter: invert(1) hue-rotate(180deg) drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+}
+
+/* Optional: Slight lift on hover to match your dashboard style */
+/* .custom-nav-logo:hover {
+    transform: scale(1.05);
+} */
+
+
+/* Ensure the text remains visible in Dark Mode */
+body.dark-mode .ventor-text {
+    color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-bg);
+    /* Essential for mix-blend-mode to work correctly in some browsers */
+    isolation: isolate;
+    padding: 40px 40px;
+    height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 1000; /* Stays above the carousel */
+}
+
+.nav-brand { display: flex; align-items: center; gap: 0px; }
+.logo-circle { width: 40px; height: 40px; background: #2563eb; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+.brand-name { font-size: 1.4rem; font-weight: 800; color: #1f2937; }
+
+.nav-links { display: flex; list-style: none; gap: 5px; padding-top: 0px;align-items: center;}
+.nav-links li a { text-decoration: none; color: #4b5563; font-weight: 500; padding: 10px 22px; border-radius: 50px; transition: 0.3s; }
+.nav-links li a:hover { background-color: #f2f2f4; color: #1872c1; }
+
+.nav-auth { display: flex; align-items: center; gap: 20px; }
+.signup-btn { background-color: #1f2937; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+ 
+}
+
+/* Container for the dropdown
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+} */
+
+/* The "v" icon styling */
+.chevron {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate icon on hover */
+.dropdown:hover .chevron {
+  transform: rotate(180deg);
+}
+
+/* The Dropdown Box */
+.dropdown-menu {
+ display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff; 
+    min-width: 220px;
+    padding: 10px; /* Space inside the box so the pills don't touch the edges */
+    margin: 0;
+    list-style: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+/* Show Menu on Hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  color:green;
+}
+
+/* Individual Dropdown Links */
+.dropdown-menu li a {
+ color: #4b5563; /* Dark grey text to match your other nav links */
+    padding: 10px 22px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50px; /* This creates the 'pill' shape */
+    transition: 0.3s;
+}
+
+.dropdown-trigger{
+  display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+/* The "Highlight" effect when hovering over an option */
+.dropdown-menu li a:hover {
+  background-color: #f2f2f4; /* Light grey background on hover */
+    color: #1872c1;           /* Green text on hover */
+    padding-left: 22px; /* Slight nudge effect */
+}
+
+/* Ensure the navbar doesn't cut off the menu */
+.nav-links {
+  overflow: visible !important;
+}
+
+/* Carousel Container */
+.carousel-container {
+    width: 100%;
+    height: calc(100vh - 60px);
+    position: relative;
+    overflow: hidden;
+    background-color: #000; /* Fallback color */
+}
+
+.slide {
+    display: none; /* Controlled by JS */
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Images */
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Dark Overlay */
+.slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* This makes the text readable */
+    z-index: 1;
+}
+
+/* Text on Image */
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2; /* Sits above the overlay */
+    width: 80%;
+}
+
+.text-overlay h2 { font-size: 3.5rem; margin-bottom: 15px; color:#ffffff }
+.text-overlay p { font-size: 1.4rem; opacity: 0.9; }
+
+/* Arrows */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    color: white;
+    font-size: 40px;
+    z-index: 100;
+    text-decoration: none;
+    background: rgba(0,0,0,0.2);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.next { right: 30px; }
+.prev { left: 30px; }
+.prev:hover, .next:hover { background: rgba(0,0,0,0.6); }
+
+/* Animation */
+.fade { animation: fadeEffect 1s ease; }
+@keyframes fadeEffect { from {opacity: 0.4} to {opacity: 1}
+}
+
+
+
+.main-container {
+    width: 100%;
+    padding: 60px 5%;
+    background-color: rgb(255, 255, 255);
+}
+
+.horizontal-grid {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 30px;
+    justify-content: center;
+}
+
+.grid-item {
+    flex: 1 1 calc(45% - 30px);
+    min-width: 350px;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05); /* Very subtle border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+/* Unique Background Colors */
+.color-1 { background-color: #f0f7ff; } /* Soft Blue */
+.color-2 { background-color: #f0fff4; } /* Soft Green */
+.color-3 { background-color: #fffaf0; } /* Soft Orange/Cream */
+.color-4 { background-color: #fdf2ff; } /* Soft Purple */
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item h2 {
+    font-size: 1.5rem;
+    color: #111827;
+    margin-bottom: 20px;
+}
+
+.grid-item p {
+    font-size: 1rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.check-list {
+    list-style: none;
+    padding: 0;
+}
+
+.check-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+.check-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .grid-item {
+        flex: 1 1 100%;
+    }
+}
+
+/* cards */
+/* Updated Cards Section */
+
+.card-container {
+    display: grid;
+    /* Changed to 4 columns to make individual cards narrower */
+    grid-template-columns: repeat(3, 1fr); 
+    padding: 40px 5%;
+    column-gap: 30px; 
+    row-gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.model-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Increased height */
+    min-height: 450px; 
+    /* Smooth transition for the shadow effect */
+    transition: all 0.3s ease-in-out; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Shadow and Lift effect on Hover */
+.model-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+    /* border-color: #2563eb; Optional: adds a blue tint to border on hover */
+}
+
+.model-card img {
+    width: 100%;
+    /* Increased image height to match taller card */
+    height: 220px; 
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 25px 20px;
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-content h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    color: #1a1a1a;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+/* Responsive Fix: Adjust columns based on screen size */
+@media (max-width: 1100px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .card-container {
+        grid-template-columns: 1fr; /* 1 card per row on mobile */
+    }
+    .model-card {
+        min-height: auto; /* Reset height for mobile to avoid empty space */
+    }
+}
+
+/* how it works */
+
+
+:root {
+  --card-bg: #ffffff;
+  --text-main: #1a1a1a;
+  --text-muted: #555555;
+  --transition-speed: 0.3s;
+}
+
+.how-it-works {
+  padding: 80px 20px;
+  background-color: #ffffff;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.steps-grid {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.step-card {
+  flex: 1;
+  background: var(--card-bg);
+  padding: 50px 30px;
+  border-radius: 12px;
+  text-align: center;
+  /* Soft widespread shadow similar to image */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Hover Effect */
+.step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Icon Container (Black Circle) */
+.icon-circle {
+    width: 85px;
+    height: 85px;
+    background-color: #000000;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-circle i {
+    color: #ffffff; /* Sets icon color to white */
+    font-size: 2.2rem; /* Adjusts the size of the icon */
+}
+
+.step-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 20px;
+}
+
+.step-description {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* CSS-only Icons based on the image style
+.icon-user-plus {
+  width: 24px; height: 24px; border: 3px solid #fff; border-radius: 50%;
+  position: relative;
+}
+.icon-user-plus::after {
+  content: '+'; color: #fff; position: absolute; right: -12px; top: -5px; font-weight: bold; font-size: 18px;
+}
+
+.icon-search {
+  width: 22px; height: 22px; border: 3px solid #fff; border-radius: 50%;
+  position: relative; transform: rotate(-45deg);
+}
+.icon-search::after {
+  content: ''; width: 3px; height: 12px; background: #fff; position: absolute; bottom: -12px; left: 8px;
+}
+
+.icon-report-check {
+  width: 20px; height: 20px; border: 3px solid #fff; border-radius: 50%;
+  position: relative;
+}
+.icon-report-check::after {
+  content: '✓'; color: #fff; position: absolute; right: -10px; top: -5px; font-size: 16px;
+} */
+
+/* Responsive */
+@media (max-width: 900px) {
+  .steps-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+
+/* footer */
+:root {
+  --bg-dark: #2d3237;
+  --icon-bg: #33383b;
+  --link-blue: #5383d3;
+}
+
+.footer-distributed {
+  background: var(--bg-dark);
+  width: 100%;
+  padding: 80px 0;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  /* This pushes the two sides to the extreme ends of the container */
+  justify-content: space-between; 
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+/* Left Column Styling */
+.footer-left {
+  flex: 0 1 auto;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.contact-item i {
+  background-color: var(--icon-bg);
+  color: #ffffff;
+  font-size: 24px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 55px;
+  margin-right: 25px;
+}
+
+.contact-item p {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 0;
+}
+
+.contact-item p span {
+  display: block;
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+
+.contact-item p a {
+  color: var(--link-blue);
+  text-decoration: none;
+}
+
+/* Right Column Styling */
+.footer-right {
+  flex: 0 1 480px; /* Limits the width of the About text */
+}
+
+.footer-company-about {
+  line-height: 1.8;
+  color: #92999f;
+  font-size: 17px;
+}
+
+.footer-company-about span {
+  display: block;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.footer-icons {
+  margin-top: 35px;
+}
+
+.footer-icons a {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: var(--icon-bg);
+  border-radius: 4px;
+  font-size: 22px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 48px;
+  margin-right: 12px;
+  transition: 0.3s;
+}
+
+.footer-icons a:hover {
+  background-color: var(--link-blue);
+  transform: translateY(-5px);
+}
+
+/* Responsive Logic */
+@media (max-width: 992px) {
+  .footer-container {
+    flex-direction: column;
+    padding: 0 30px;
+    gap: 50px;
+  }
+  .footer-right {
+    max-width: 100%;
+  }
+}
+
+/* Faq section */
+/* The horizontal line: Black and Thick */
+.faq-divider {
+    border: none;
+    height: 6px;             /* This controls the thickness */
+    background-color: #000;  /* Solid black */
+    width: 100px;            /* Width of the line */
+    margin: 0 auto 20px auto; /* Centers it and adds space below */
+}
+
+/* The Title: Large and Spaced */
+.section-title {
+    font-size: 3.5rem;       /* Significantly larger text */
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-top: 0;
+    margin-bottom: 60px;     /* Large gap between title and questions */
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* Responsive fix for smaller screens */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+}
+
+.faq-section {
+    padding: 80px 20px;
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+.faq-container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.faq-item {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 25px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+
+.faq-question i {
+    font-size: 0.9rem;
+    color: #2b6cb0; 
+    transition: transform 0.3s ease;
+}
+
+.faq-question:hover {
+    color: #2b6cb0;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #fff;
+}
+
+.faq-answer p {
+    padding: 0 25px 25px 25px;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #718096;
+    text-align: left;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-question {
+    color: #2b6cb0;
+}
+
+
+
+
+
+
+/* --- Dark Mode Variables & Toggle Style --- */
+
+/* Default Light Mode Variables (matching your current colors) */
+:root {
+    --bg-body: #ffffff;
+    --bg-nav: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #4b5563;
+    --card-bg: #ffffff;
+    --section-bg: #f8f9fa; /* For FAQ/Cards */
+    --accent-blue: #2563eb;
+    --border-color: #e0e0e0;
+}
+
+/* Dark Mode Theme: Black, Blue, and White */
+body.dark-mode {
+    --bg-body: #0a0a0a;      /* Black */
+    --bg-nav: #111111;       /* Darker Black */
+    --text-main: #ffffff;    /* White */
+    --text-muted: #d1d5db;   /* Light Gray/White */
+    --card-bg: #1a1a1a;      /* Dark Gray */
+    --section-bg: #111111;   /* Black */
+    --accent-blue: #3b82f6;  /* Bright Blue */
+    --border-color: #333333;
+}
+
+/* Apply Variables to existing elements */
+body { background-color: var(--bg-body); color: var(--text-main); transition: background 0.3s, color 0.3s; }
+.navbar { background-color: var(--bg-nav); border-bottom: 1px solid var(--border-color); }
+.brand-name, .nav-links li a { color: var(--text-main); }
+.main-container, .how-it-works, .faq-section { background-color: var(--bg-body); }
+.grid-item, .model-card, .step-card, .faq-item { 
+    background-color: var(--card-bg) !important; 
+    border-color: var(--border-color) !important;
+    color: var(--text-main);
+}
+.grid-item h2, .card-content h3, .step-title, .faq-question { color: var(--text-main); }
+.grid-item p, .card-content p, .step-description, .faq-answer p { color: var(--text-muted); }
+
+/* Toggle Button Styling */
+.mode-toggle {
+    background: none;
+    border: 2px solid var(--accent-blue);
+    color: var(--accent-blue);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    margin-right: 10px;
+}
+
+.mode-toggle:hover {
+    background-color: var(--accent-blue);
+    color: #fff;
+}
+
+/* Dark mode specific adjustments */
+body.dark-mode .faq-answer, 
+body.dark-mode .dropdown-menu {
+    background-color: #1a1a1a;
+}
+body.dark-mode .nav-links li a:hover {
+    background-color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+/* for blue titles in dark mode */
+body.dark-mode .section-title {
+    color: #1e3a8a !important;
+}
+
+
+
+
+
+/* This forces the original colors to stay active even when dark-mode is on */
+body.dark-mode .grid-item.color-1 { background-color: #f0f7ff !important; }
+body.dark-mode .grid-item.color-2 { background-color: #f0fff4 !important; }
+body.dark-mode .grid-item.color-3 { background-color: #fffaf0 !important; }
+body.dark-mode .grid-item.color-4 { background-color: #fdf2ff !important; }
+
+/* Keep text dark inside these specific cards so it remains readable */
+body.dark-mode .grid-item h2, 
+body.dark-mode .grid-item p, 
+body.dark-mode .grid-item li {
+    color: #111827 !important;
+}
+
+/* Keep the bullet points blue */
+body.dark-mode .grid-item li::before {
+    color: #2563eb !important;
+}
+
+
+
+
+
+
+
+
+
+
+/* --- PLATFORM OVERVIEW COLOR LOCK --- */
+
+/* This section ensures the colors work in BOTH Light and Dark modes */
+
+.grid-item.color-1, body.dark-mode .grid-item.color-2-fake, /* fallback */
+body.dark-mode .grid-item.color-1 { 
+    background-color: #f0f7ff !important; 
+}
+
+.grid-item.color-2, 
+body.dark-mode .grid-item.color-2 { 
+    background-color: #f0fff4 !important; 
+}
+
+.grid-item.color-3, 
+body.dark-mode .grid-item.color-3 { 
+    background-color: #fffaf0 !important; 
+}
+
+.grid-item.color-4, 
+body.dark-mode .grid-item.color-4 { 
+    background-color: #fdf2ff !important; 
+}
+
+/* Ensure text inside these 4 cards is ALWAYS dark/readable in both modes */
+.grid-item h2, 
+.grid-item p, 
+.grid-item li,
+body.dark-mode .grid-item h2, 
+body.dark-mode .grid-item p, 
+body.dark-mode .grid-item li {
+    color: #111827 !important;
+}
+
+/* Ensure the bullet points remain blue in both modes */
+.grid-item li::before,
+body.dark-mode .grid-item li::before {
+    color: #2563eb !important;
+}
+
+
+/* --- OVERRIDE FOR CONNECTED PAGES --- */
+
+/* Force Backgrounds to Dark */
+body.dark-mode .how-it-works, 
+body.dark-mode .faq-section,
+body.dark-mode .assessment-section,
+body.dark-mode .main-container {
+    background-color: var(--bg-body) !important;
+}
+
+/* Force Cards and FAQ items to Dark Gray */
+body.dark-mode .step-card, 
+body.dark-mode .faq-item, 
+body.dark-mode .model-card,
+body.dark-mode .assessment-body,
+body.dark-mode .calculator-box,
+body.dark-mode .traffic-box {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Force All Text to White/Light Gray */
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode p, 
+body.dark-mode li,
+body.dark-mode .faq-question,
+body.dark-mode .step-title {
+    color: var(--text-main) !important;
+}
+
+/* Force Secondary Text/Descriptions */
+body.dark-mode .step-description, 
+body.dark-mode .faq-answer p, 
+body.dark-mode .assessment-text-large {
+    color: var(--text-muted) !important;
+}
+
+
+
+/* chatbot */
+/* Prevent Dark Mode from turning chatbot text white */
+body.dark-mode #chatbot-window * {
+    color: inherit; 
+}
+
+body.dark-mode .bot-message {
+    color: #000000 !important;
+}
+
+
+
+
+
+
+
