@@ -15,10 +15,12 @@ const groq = new Groq({
 connectDB();
 
 /* MIDDLEWARE */
-const FRONTEND_URL = process.env.FRONTEND_URL || true;
-app.use(cors({ origin: FRONTEND_URL, credentials: true }));
-app.use(express.json());
-
+app.use(cors({
+  // Replace this with your actual Vercel URL
+  origin: ["https://ventor-seven.vercel.app/", "http://localhost:5500"], 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 /* ROUTES */
 app.use("/api", reportRoutes);
 
