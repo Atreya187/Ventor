@@ -17,9 +17,9 @@ connectDB();
 /* MIDDLEWARE */
 // app.use(cors());
 app.use(cors({
-  origin:"https://ventor-doso0eugp-aaradhyakesha-4932s-projects.vercel.app/", // Add your Vercel URL here
+  origin:"*", // Add your Vercel URL here
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  // credentials: true
 }));
 app.use(express.json());
 
