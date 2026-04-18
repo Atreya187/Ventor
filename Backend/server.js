@@ -15,11 +15,11 @@ const groq = new Groq({
 connectDB();
 
 /* MIDDLEWARE */
+// Inside Backend/server.js
 app.use(cors({
-  // Replace this with your actual Vercel URL
-  origin: ["https://ventor-seven.vercel.app/", "http://localhost:5500"], 
+  origin: "https://ventor-seven.vercel.app/", // This allows ANY frontend to talk to it for now
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  credentials: false // Set to false since origin is "*"
 }));
 /* ROUTES */
 app.use("/api", reportRoutes);
