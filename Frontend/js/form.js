@@ -201,9 +201,13 @@ const highestMatch = Object.entries(result.scores).reduce((best,[model,score]) =
   return best;
 }, [null, null]);
 
-Object.entries(result.scores).forEach(([model,score])=>{
+const scoreEntries = Object.entries(result.scores);
+const rawPercents = scoreEntries.map(([,s]) => totalScore > 0 ? (s / totalScore) * 100 : 0);
+const roundedPercents = rawPercents.map(p => parseFloat(p.toFixed(1)));
+const diff = parseFloat((roundedPercents.reduce((a,b)=>a+b,0) - 100).toFixed(1));
+roundedPercents[roundedPercents.length - 1] = parseFloat((roundedPercents[roundedPercents.length - 1] - diff).toFixed(1));
 
-const percent = totalScore > 0 ? ((score/totalScore)*100).toFixed(1) : "0.0";
+scoreEntries.forEach(([model],i)=>{
 
 const row = document.createElement("tr");
 
@@ -213,7 +217,7 @@ row.classList.add("best-model");
 
 row.innerHTML = `
 <td>${model.toUpperCase()}</td>
-<td>${percent}%</td>
+<td>${roundedPercents[i].toFixed(1)}%</td>
 `;
 
 tableBody.appendChild(row);
@@ -314,8 +318,7 @@ result.cautions.map(c=>`<li>${c}</li>`).join("");
 
 const maxScore = Math.max(...Object.values(result.scores));
 
-const successPercent =
-Math.round((maxScore / totalScore) * 100);
+const successPercent = parseFloat(((maxScore / totalScore) * 100).toFixed(1));
 
 document.getElementById("successScore").innerText =
 successPercent + "%";
