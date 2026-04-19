@@ -1,0 +1,389 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* --- VENTOR Logo Styles --- */
+.ventor-logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0px; /* Keeps the V and ENTOR connected */
+}
+
+.ventor-v {
+    width: 48px;
+    height: 35px;
+    margin-right: -2px; /* Pulls text slightly closer to the V */
+    margin-top: -1.5px; /* Optically aligns the V with the text height */
+    filter: brightness(1.4);
+}
+
+body.dark-mode .ventor-v{
+filter: brightness(2) drop-shadow(0 0 8px rgba(0, 255, 170, 0.2));
+}
+
+.ventor-text {
+    font-family:Michroma;  
+  font-weight: 700;          /* Bold */
+  font-size: 25px;           /* Adjust as needed */
+  letter-spacing: 4px;       /* IMPORTANT for logo feel */
+  text-transform: uppercase;
+  color: #0b1f3a;     
+}
+
+/* Separate class for the logo image */
+.custom-nav-logo {
+    height: 48px;
+    width: auto;
+    display: block;
+    transition: all 0.3s ease;
+    
+    /* LIGHT MODE: Standard white background removal */
+    mix-blend-mode: multiply; 
+    margin-right: -5px;
+    background-image: transparent;
+}
+
+/* Dark Mode handling for the logo */
+body.dark-mode .custom-nav-logo {
+    /* 1. Remove blend mode which fails on black */
+    mix-blend-mode: normal; 
+    
+    /* 2. The Filter Stack:
+       - Invert(1) turns the white background black
+       - Hue-rotate(180deg) restores the original blue/green colors
+       - Brightness/Contrast makes it pop against the dark theme */
+    filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2);
+    
+    /* 3. Optional: Add a subtle glow so the logo doesn't feel 'flat' */
+    filter: invert(1) hue-rotate(180deg) drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+}
+
+/* Optional: Slight lift on hover to match your dashboard style */
+/* .custom-nav-logo:hover {
+    transform: scale(1.05);
+} */
+
+
+/* Ensure the text remains visible in Dark Mode */
+body.dark-mode .ventor-text {
+    color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    /* background: linear-gradient(135deg,#2c3e50, #4ca1af); */
+    padding: 40px 40px;
+    height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 1000; /* Stays above the carousel */
+}
+
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.logo-circle { width: 40px; height: 40px; background: #2563eb; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+.brand-name { font-size: 1.4rem; font-weight: 800; color: #1f2937; }
+
+.nav-links { display: flex; list-style: none; gap: 5px; padding-top: 0px;align-items: center;}
+.nav-links li a { text-decoration: none; color: #4b5563; font-weight: 500; padding: 10px 22px; border-radius: 50px; transition: 0.3s; }
+.nav-links li a:hover { background-color: #f2f2f4; color: #1872c1; }
+
+.nav-auth { display: flex; align-items: center; gap: 20px; }
+.signup-btn { background-color: #1f2937; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+ 
+}
+
+/* Container for the dropdown
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+} */
+
+/* The "v" icon styling */
+.chevron {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate icon on hover */
+.dropdown:hover .chevron {
+  transform: rotate(180deg);
+}
+
+/* The Dropdown Box */
+.dropdown-menu {
+ display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff; 
+    min-width: 220px;
+    padding: 10px; /* Space inside the box so the pills don't touch the edges */
+    margin: 0;
+    list-style: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+/* Show Menu on Hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  color:green;
+}
+
+/* Individual Dropdown Links */
+.dropdown-menu li a {
+ color: #4b5563; /* Dark grey text to match your other nav links */
+    padding: 10px 22px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50px; /* This creates the 'pill' shape */
+    transition: 0.3s;
+}
+
+.dropdown-trigger{
+  display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+/* The "Highlight" effect when hovering over an option */
+.dropdown-menu li a:hover {
+  background-color: #f2f2f4; /* Light grey background on hover */
+   color: #1872c1;           /* Green text on hover */
+    padding-left: 22px; /* Slight nudge effect */
+}
+
+/* Ensure the navbar doesn't cut off the menu */
+.nav-links {
+  overflow: visible !important;
+}
+
+.profit-section {
+    padding: 100px 0 0 0; /* Top padding to prevent overlap with fixed navbar */
+    margin-bottom: 100px; /* This creates the space between calculator and footer */
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.profit-section h1 {
+    font-size:45px;
+    margin-bottom: 10px;
+    font-weight:bolder;
+    color: #2D00FB;
+    text-transform: uppercase ;
+}
+
+.profit-section h2 {
+    font-size: 18px;
+    margin-top:32px;
+    margin-bottom:32PX;
+    color: #000000;
+}
+
+.calculator-box {
+    margin-top:30PX;
+    width: 550px;
+    height:450px;
+    margin: auto;
+    background: #ffffff;
+    padding:40px;
+    border-radius:25px;
+    font-size: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.calculator-box input {
+    width: 100%;
+    padding: 20px;
+    font-size: 15px;
+    margin: 8px 0 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.calculator-box button {
+    width:70%;
+    padding:20px;
+    background: #6270f0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight:bold;
+    font-size: 25px;
+    text-align:center;
+    margin-left:30px;
+
+}
+
+.calculator-box button:hover {
+    background: #2c09dc;
+}
+
+.result-box {
+    margin-top: 20px;
+    text-align:center;
+    padding-top: 5px;
+    font-size: 25px;
+    line-height: 35px;
+}
+
+
+
+
+/* footer */
+:root {
+  --bg-dark: #2d3237;
+  --icon-bg: #33383b;
+  --link-blue: #5383d3;
+}
+
+.footer-distributed {
+  background: var(--bg-dark);
+    width: 100%;
+    padding: 80px 0;
+    margin-bottom: 0; /* Removes space below the footer */
+    font-family: Arial, sans-serif;
+    display: block;
+}
+
+.footer-container {
+  display: flex;
+  /* This pushes the two sides to the extreme ends of the container */
+  justify-content: space-between; 
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+/* Left Column Styling */
+.footer-left {
+  flex: 0 1 auto;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.contact-item i {
+  background-color: var(--icon-bg);
+  color: #ffffff;
+  font-size: 24px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 55px;
+  margin-right: 25px;
+}
+
+.contact-item p {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 0;
+}
+
+.contact-item p span {
+  display: block;
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+
+.contact-item p a {
+  color: var(--link-blue);
+  text-decoration: none;
+}
+
+/* Right Column Styling */
+.footer-right {
+  flex: 0 1 480px; /* Limits the width of the About text */
+}
+
+.footer-company-about {
+  line-height: 1.8;
+  color: #92999f;
+  font-size: 17px;
+}
+
+.footer-company-about span {
+  display: block;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.footer-icons {
+  margin-top: 35px;
+}
+
+.footer-icons a {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: var(--icon-bg);
+  border-radius: 4px;
+  font-size: 22px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 48px;
+  margin-right: 12px;
+  transition: 0.3s;
+}
+
+.footer-icons a:hover {
+  background-color: var(--link-blue);
+  transform: translateY(-5px);
+}
+
+/* Responsive Logic */
+@media (max-width: 992px) {
+  .footer-container {
+    flex-direction: column;
+    padding: 0 30px;
+    gap: 50px;
+  }
+  .footer-right {
+    max-width: 100%;
+  }
+}

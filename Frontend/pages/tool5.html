@@ -1,0 +1,166 @@
+     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULATOR</title>
+    <link rel="stylesheet" href="../css/tool5.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- for  chatbot
+     <link rel="stylesheet" href="Chatbot.css"> -->
+     <link rel="stylesheet" href="../css/Chatbot_Shrenik.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script src="../js/script.js" defer></script>
+</head>
+<body>
+    <section class="profit-section">
+
+         <nav class="navbar">
+        <div class="nav-brand">
+             <a href="index.html" class="ventor-logo-container">
+        <img src="../assets/images/ventor-logo.png" alt="Ventor Logo" class="custom-nav-logo">
+    </a>
+            <a href="index.html" class="ventor-logo-container">
+                <svg viewBox="0 0 100 100" class="ventor-v">
+                    <defs>
+                        <linearGradient id="v-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="10%" stop-color="#25b66e" />  <stop offset="50%" stop-color="#0a2a5c" />  <stop offset="90%" stop-color="#14a9cd" />  </linearGradient>
+                    </defs>
+                    <path d="M 10 25 L 28 25 L 50 75 L 70 35 L 58 35 L 82 5 L 98 35 L 85 35 L 50 100 Z" fill="url(#v-gradient)" />
+                </svg>
+                <span class="ventor-text">ENTOR</span>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../pages/Services.html">Services</a></li>
+    <!-- <li><a href="Portfolio.html">Portfolio</a></li> -->
+   <li class="dropdown">
+    <a href="#" class="dropdown-trigger">
+        Tools <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z"/></svg>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href="../pages/Tool1.html">Profit calculator</a></li>
+        <li><a href="../pages/Tool2.html">Traffic calculator</a></li>
+        <li><a href="../pages/Tool3.html">Break-even calculator</a></li>
+        <li><a href="../pages/Tool4.html">ROI calculator</a></li>
+        <li><a href="../pages/tool5.html">LTV vs CAC calculator</a></li>
+    </ul>
+</li>
+    <!-- <li><a href="#faq-section">FAQ</a></li> -->
+    <li><a href="#19">About us</a></li> 
+</ul>
+
+        <div class="nav-auth">
+    <!-- <button id="dark-mode-toggle" class="mode-toggle">
+        <i class="fa-solid fa-moon"></i> -->
+    </button>
+    
+    <!-- <a href="#" class="login-link">Login</a>
+    <button class="signup-btn">Sign Up</button> -->
+</div>
+    </nav>
+       <section class="LTVCAC">
+            <h1>LTV vs CAC calculator</h1>
+            <!-- <h2>Shows how profitable the startup is compared to the investment</h2> -->
+            <div class="container">
+            <label class="section-title">CAC Inputs</label>
+            <label for="marketingCost" class="input-title">Marketing cost</label>
+            <input type="number" id="marketingCost" placeholder="Marketing Cost">
+            <label for="customers" class="input-title">Number of customers acquired</label>
+            <input type="number" id="customers" placeholder="Number of customers acquired">
+
+            <label class="section-title">LTV Inputs</label>
+            <label for="avgPurchase" class="input-title">Average purchase value</label>
+            <input type="number" id="avgPurchase" placeholder="Average Purchase Value">
+            <label for="frequency" class="input-title">Purchase frequency in a year</label>
+            <input type="number" id="frequency" placeholder="Purchase frequency in a year">
+            <label for="lifespan" class="input-title">Customer lifespan (years)</label>
+            <input type="number" id="lifespan" placeholder="Customer lifespan (year)">
+
+            <button onclick="calculate()">Calculate</button>
+            <!-- <h3 id="roiResult"></h3> -->
+                <div class="result" id="cacResult"></div>
+                <div class="result" id="ltvResult"></div>
+                <div class="result" id="comparison"></div>
+            </div>
+        
+       </section>
+     
+        
+
+    
+
+        <footer class="footer-distributed" id="19">
+    <div class="footer-container">
+        <div class="footer-left">
+            <div class="contact-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <p><span>Shivshrushti chowk</span> Vadgaon,India</p>
+            </div>
+
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <p>+91 91555 123456</p>
+            </div>
+
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <p><a href="mailto:support@company.com">ventor@company.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the company</span>
+                Startup Model Planner is a web-based platform that helps entrepreneurs choose the right E-Commerce business model through structured analysis.
+We combine E-Business fundamentals with logic-based evaluation to support informed, scalable startup decisions.
+            </p>
+
+            <div class="footer-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  
+
+<!-- <script src="script.js"></script> -->
+<!-- chatbot -->
+   <div id="chatbot-toggle" onclick="toggleChatbot()">
+    💬
+   </div>
+
+<div id="chatbot-window">
+    <div class="chatbot-header">
+        Startup AI Assistant
+        <span class="chatbot-close" onclick="toggleChatbot()">✖</span>
+    </div>
+
+    <div id="chatbot-messages">
+        <div class="bot-message">
+            Hello 👋 I can help you choose the right e-commerce business model.
+        </div>
+    </div>
+
+    <div class="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="Ask Here">
+        <button id="chatbot-send">Send</button>
+    </div>
+</div>
+<script src="../js/Chatbot_Shrenik.js"></script>
+     <script src="../js/tool5.js"></script>
+</body>
+</html>
+
+
+    

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Startup Model Planner</title>
+
+<link rel="stylesheet" href="../css/form.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+
+<div class="form-wrapper">
+
+<div class="form-card">
+
+<h1><i class="fa-solid fa-chart-line"></i> Startup Model Planner</h1>
+
+<p class="subtitle">
+Discover the best ecommerce business model for your startup
+</p>
+
+<form id="startupForm">
+
+<div class="section-title">
+<i class="fa-solid fa-building"></i>
+Company Information
+</div>
+
+<div class="grid">
+
+<div class="input-box">
+<i class="fa-solid fa-city"></i>
+<input type="text" placeholder="Company Name" name="company_name" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-user"></i>
+<input type="text" placeholder="Founder Name" name="founder_name" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-calendar"></i>
+<input type="date" name="establishment_date" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-industry"></i>
+<input type="text" placeholder="Industry / Product Category" name="industry" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-money-bill"></i>
+<input type="number" placeholder="Initial Investment ₹" name="investment" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-percent"></i>
+<input type="number" placeholder="Profit Margin %" name="profit_margin" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-users"></i>
+<input type="number" placeholder="Expected Customers" name="expected_customers" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-tag"></i>
+<input type="number" placeholder="Average Price ₹" name="avg_price" required>
+</div>
+
+</div>
+
+
+<div class="section-title">
+<i class="fa-solid fa-lightbulb"></i>
+Business Strategy
+</div>
+
+<div class="select-box">
+
+<label>Revenue Strategy</label>
+<select name="revenue_strategy" required>
+<option>Recurring monthly payments</option>
+<option>Commission from referrals</option>
+<option>One-time product sales</option>
+<option>Commission from sellers</option>
+<option>Bulk orders from businesses</option>
+</select>
+
+<label>Product Ownership</label>
+<select name="product_ownership" required>
+<option>Yes</option>
+<option>No</option>
+<option>Not sure yet</option>
+</select>
+
+<label>Inventory Management</label>
+<select name="inventory_management" required>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<label>Target Customers</label>
+<select name="target_customer" required>
+<option>Individual consumers</option>
+<option>Businesses</option>
+<option>Both</option>
+</select>
+
+<label>Platform Strategy</label>
+<select name="platform_strategy" required>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<label>Investment Capacity</label>
+<select name="investment_capacity" required>
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
+
+<label>Supplier Dependence</label>
+<select name="supplier_dependence" required>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<label>Customer Relationship</label>
+<select name="customer_relationship" required>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<label>Operational Complexity</label>
+<select name="operations_complexity" required>
+<option>Very simple</option>
+<option>Moderate</option>
+<option>Complex</option>
+</select>
+
+<label>Marketing Strategy</label>
+<select name="marketing_strategy" required>
+<option>Digital marketing</option>
+<option>Brand building</option>
+<option>Seller partnerships</option>
+</select>
+
+<label>Product Delivery Type</label>
+<select name="delivery_type" required>
+<option>Subscription delivery</option>
+<option>On-demand purchase</option>
+<option>Supplier ships directly</option>
+</select>
+
+<label>Business Scalability</label>
+<select name="scalability" required>
+<option>More customers</option>
+<option>More suppliers</option>
+<option>Bulk contracts</option>
+</select>
+
+</div>
+
+<button class="submit-btn">
+<i class="fa-solid fa-rocket"></i>
+Generate Startup Report
+</button>
+
+</form>
+
+<div id="loadingScreen" style="display:none">
+
+<div class="loading-card">
+
+<h2>Analyzing Your Startup Strategy</h2>
+
+<div class="loader"></div>
+
+<p id="loadingText">Evaluating business models...</p>
+
+</div>
+
+</div>
+<div id="reportSection" style="display:none">
+
+<h1 class="report-title">Startup Business Model Report</h1>
+
+<div class="report-card">
+
+<h2>Company Information</h2>
+
+<div id="companyInfo"></div>
+
+</div>
+
+
+<div class="report-card">
+
+<h2>Recommended Business Model</h2>
+
+<h3 id="recommendedModel"></h3>
+
+</div>
+<div class="report-card">
+
+<h2>Why This Model Was Recommended</h2>
+
+<ul id="modelExplanation"></ul>
+
+</div>
+<div class="report-card">
+    <div class="report-card ai-insight">
+
+<h2>Logic Based Engine</h2>
+
+<p id="aiInsightText"></p>
+
+</div>
+
+<h2>Business Model Compatibility Analysis</h2>
+
+<table id="modelTable">
+
+<thead>
+<tr>
+<th>Business Model</th>
+<th>Compatibility Score</th>
+</tr>
+</thead>
+
+<tbody id="modelTableBody"></tbody>
+
+</table>
+
+</div>
+
+<div class="report-card">
+
+<h2>Model Compatibility</h2>
+
+<canvas id="scoreChart"></canvas>
+
+</div>
+
+
+<div class="report-card">
+
+<h2>Strengths & Risks</h2>
+
+<h3>Advantages</h3>
+<ul id="advantages"></ul>
+
+<h3>Risks</h3>
+<ul id="risks"></ul>
+</div>
+
+<div class="report-card">
+
+<h2>⚠ Business Cautions</h2>
+
+<ul id="cautions"></ul>
+
+</div>
+
+<div class="report-card">
+
+<h2>Revenue Projection</h2>
+
+<p id="monthlyRevenue"></p>
+<p id="yearlyRevenue"></p>
+
+</div>
+<div class="report-card">
+
+<h2>Revenue Dashboard</h2>
+
+<canvas id="revenueChart"></canvas>
+
+</div>
+
+
+<div class="report-card">
+
+<h2>Strategic Recommendations</h2>
+
+<ul id="recommendations"></ul>
+
+</div>
+<div class="report-card">
+
+<h2>Match Probability</h2>
+
+<p id="topMatch" class="top-match-text"></p>
+
+<div class="score-container">
+
+<div id="successScore">0%</div>
+
+<div class="score-bar">
+<div id="scoreFill"></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="report-buttons">
+
+<button id="downloadBtn">Download Report</button>
+
+<button id="deleteBtn">Delete Report</button>
+
+</div>
+
+
+</div>
+
+</div>
+</div>
+<script src="../js/form.js"></script>
+
+
+</body>
+</html>
