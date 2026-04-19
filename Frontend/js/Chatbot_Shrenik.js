@@ -39,17 +39,14 @@ messages.scrollTop = messages.scrollHeight;
 
 try{
 
-const response = await fetch("http://localhost:5000/chat",{
-
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-message:text
-})
-
+const response = await fetch("https://ventor.onrender.com/chat", { // Updated to Render URL
+  method:"POST",
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body:JSON.stringify({
+    message:text
+  })
 });
 
 const data = await response.json();
