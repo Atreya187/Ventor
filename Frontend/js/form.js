@@ -41,14 +41,15 @@ const data = Object.fromEntries(formData.entries());
 /* SEND DATA TO BACKEND */
 
 const response = await fetch(
-"http://localhost:5000/api/generate-report",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(data)
-});
+  "https://ventor.onrender.com/api/generate-report", // Updated to Render URL
+  {
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(data)
+  }
+);
 
 const result = await response.json();
 
