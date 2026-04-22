@@ -1,0 +1,332 @@
+
+
+
+*{
+box-sizing:border-box;
+font-family:Inter, sans-serif;
+}
+
+/* BODY */
+
+body{
+margin:0;
+background:linear-gradient(135deg,#1e3a8a,#0f172a);
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
+}
+
+/* FORM CARD */
+
+.form-card{
+background:rgba(255,255,255,0.95);
+padding:40px;
+border-radius:20px;
+width:900px;
+max-width:100%;
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+}
+
+/* TITLES */
+
+h1{
+text-align:center;
+margin-bottom:5px;
+}
+
+.subtitle{
+text-align:center;
+color:#6b7280;
+margin-bottom:30px;
+}
+
+.section-title{
+font-weight:700;
+margin:30px 0 15px;
+font-size:18px;
+color:#1f2937;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+/* INPUT */
+
+.input-box{
+position:relative;
+}
+
+.input-box i{
+position:absolute;
+top:14px;
+left:12px;
+color:#2563eb;
+}
+
+.input-box input{
+width:100%;
+padding:12px 12px 12px 35px;
+border-radius:8px;
+border:1px solid #d1d5db;
+font-size:14px;
+}
+
+/* SELECT */
+
+.select-box label{
+display:block;
+margin-top:15px;
+font-weight:600;
+}
+
+.select-box select{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #d1d5db;
+margin-top:5px;
+}
+
+/* BUTTON */
+
+.submit-btn{
+margin-top:30px;
+width:100%;
+padding:16px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.submit-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* REPORT SECTION */
+
+#reportSection{
+background:white;
+color:black;
+max-width:900px;
+margin:auto;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* REPORT TITLE */
+
+.report-title{
+text-align:center;
+font-size:32px;
+margin-bottom:40px;
+}
+
+/* REPORT CARDS */
+
+.report-card{
+background:white;
+padding:25px;
+margin-bottom:25px;
+border-radius:10px;
+border:1px solid #ddd;
+page-break-inside:avoid;
+}
+
+/* REVENUE */
+
+.revenue-box{
+text-align:center;
+font-size:18px;
+margin-bottom:20px;
+}
+
+/* CHART */
+
+canvas{
+max-width:600px;
+margin:auto;
+display:block;
+}
+
+/* SUCCESS SCORE */
+
+.score-container{
+text-align:center;
+margin-top:20px;
+}
+
+#successScore{
+font-size:40px;
+font-weight:bold;
+color:#4f46e5;
+margin-bottom:10px;
+}
+
+.top-match-text{
+font-size:18px;
+font-weight:700;
+color:#111827;
+margin-bottom:15px;
+}
+
+.score-bar{
+width:100%;
+height:20px;
+background:#e5e7eb;
+border-radius:20px;
+overflow:hidden;
+}
+
+#scoreFill{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#10b981,#4f46e5);
+transition:width 1s ease;
+}
+
+/* MODEL EXPLANATION */
+
+#modelExplanation{
+line-height:1.8;
+font-size:16px;
+}
+
+#modelExplanation li{
+margin-bottom:8px;
+}
+
+/* MODEL TABLE */
+
+#modelTable{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+#modelTable th{
+background:#4f46e5;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+#modelTable td{
+padding:12px;
+border-bottom:1px solid #ddd;
+}
+
+#modelTable tr:hover{
+background:#f3f4f6;
+}
+
+.best-model{
+background:#dcfce7;
+font-weight:bold;
+}
+
+/* BUTTONS */
+
+.report-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:30px;
+}
+
+#downloadBtn{
+background:#10b981;
+color:white;
+padding:12px 30px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+#deleteBtn{
+background:#ef4444;
+color:white;
+padding:12px 30px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+#downloadBtn:hover{
+background:#059669;
+}
+
+#deleteBtn:hover{
+background:#dc2626;
+}
+
+/* LOADING SCREEN */
+
+#loadingScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.loading-card{
+background:white;
+padding:40px;
+border-radius:12px;
+text-align:center;
+width:400px;
+}
+
+.loader{
+width:50px;
+height:50px;
+border:5px solid #e5e7eb;
+border-top:5px solid #4f46e5;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin:20px auto;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+/* AI INSIGHT */
+
+.ai-insight{
+background:linear-gradient(135deg,#4f46e5,#06b6d4);
+color:white;
+}
+
+.ai-insight h2{
+margin-bottom:10px;
+}
+
+#aiInsightText{
+font-size:16px;
+line-height:1.6;
+}
