@@ -66,23 +66,28 @@ gap:15px;
 
 /* INPUT */
 
-.input-box{
-position:relative;
+.input-box {
+    position: relative;
 }
 
-.input-box i{
-position:absolute;
-top:14px;
-left:12px;
-color:#2563eb;
+.input-box i {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%); 
+    left: 10px; /* Shifted the icon further to the left */
+    width: 30px; /* Gives the icon plenty of room */
+    text-align: center; 
+    color: #2563eb;
+    pointer-events: none; 
 }
 
-.input-box input{
-width:100%;
-padding:12px 12px 12px 35px;
-border-radius:8px;
-border:1px solid #d1d5db;
-font-size:14px;
+.input-box input {
+    width: 100%;
+    padding: 12px 12px 12px 60px !important; /* Forces the text to start 60px away from the left edge */
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    box-sizing: border-box !important; /* Ensures the heavy padding doesn't break the input box width */
 }
 
 /* SELECT */
@@ -404,9 +409,7 @@ canvas {
     max-width: 100% !important;
     height: auto !important;
 }
-/* ==========================================
-   MOBILE RESPONSIVENESS
-   ========================================== */
+
 /* ==========================================
    MOBILE RESPONSIVENESS
    ========================================== */
